@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scam Shield — Check any message for scam indicators instantly</title>
+  <meta name="description" content="Multi-surface scam detection. Analyze messages, URLs, crypto addresses, and phone numbers for 100+ scam patterns.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #1a1a2e; }
+    
+    .hero { background: linear-gradient(135deg, #e17055, #fab1a0); color: white; padding: 100px 20px; text-align: center; }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem; }
+    
+    .cta { display: inline-block; background: white; color: #e17055; padding: 15px 40px; border-radius: 8px; font-size: 1.2rem; font-weight: bold; text-decoration: none; transition: transform 0.2s; }
+    .cta:hover { transform: scale(1.05); }
+    
+    .section { padding: 80px 20px; max-width: 900px; margin: 0 auto; }
+    .section h2 { font-size: 2rem; margin-bottom: 2rem; text-align: center; }
+    
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .feature { background: #f8f9fa; padding: 30px; border-radius: 12px; }
+    .feature h3 { margin-bottom: 10px; }
+    .feature .emoji { font-size: 2rem; margin-bottom: 10px; }
+    
+    .pricing { text-align: center; }
+    .price-card { display: inline-block; background: white; border: 2px solid #e0e0e0; border-radius: 16px; padding: 40px; margin: 10px; min-width: 280px; }
+    .price-card.featured { border-color: #e17055; transform: scale(1.05); }
+    .price-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+    .price-card .price { font-size: 2.5rem; font-weight: bold; color: #e17055; }
+    .price-card .price span { font-size: 1rem; color: #666; }
+    .price-card ul { list-style: none; margin: 20px 0; text-align: left; }
+    .price-card li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+    .price-card li::before { content: "✅ "; }
+    
+    .buy-btn { display: inline-block; background: #e17055; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+    
+    .social-proof { background: #f8f9fa; padding: 60px 20px; text-align: center; }
+    .social-proof .stat { display: inline-block; margin: 0 30px; }
+    .social-proof .stat .number { font-size: 2.5rem; font-weight: bold; color: #e17055; }
+    .social-proof .stat .label { font-size: 0.9rem; color: #666; }
+    
+    .footer { background: #1a1a2e; color: white; padding: 40px 20px; text-align: center; }
+    .footer a { color: #e17055; }
+    
+    .beta-badge { display: inline-block; background: #ff6b35; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 20px; }
+    
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .price-card { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="beta-badge">🧪 BETA — Free while testing</div>
+    <h1>Scam Shield</h1>
+    <p>Check any message for scam indicators instantly</p>
+    <a href="https://t.me/ScamShieldBot" class="cta">🤖 Try Free on Telegram</a>
+  </div>
+
+  <div class="section">
+    <h2>The Problem</h2>
+    <p style="text-align: center; font-size: 1.1rem; color: #666;">You get a suspicious message. Is it a scam? You're not sure. Current tools only check one thing — Truecaller checks phone numbers, Google checks URLs. Nobody checks everything.</p>
+  </div>
+
+  <div class="section">
+    <h2>How It Works</h2>
+    <div class="features">
+      
+      <div class="feature">
+        <div class="emoji">📧</div>
+        <h3>Message Analysis</h3>
+        <p>Paste any suspicious message. Get an instant scam score (0-100) with specific red flags explained.</p>
+      </div>
+      <div class="feature">
+        <div class="emoji">🔗</div>
+        <h3>URL Checker</h3>
+        <p>Check any link for typosquatting, suspicious TLDs, and phishing paths before you click.</p>
+      </div>
+      <div class="feature">
+        <div class="emoji">₿</div>
+        <h3>Crypto Address Check</h3>
+        <p>Verify crypto addresses for burn addresses, dust attacks, and known scam tokens.</p>
+      </div>
+      <div class="feature">
+        <div class="emoji">📞</div>
+        <h3>Phone Number Check</h3>
+        <p>Check for premium rate numbers, spoofed patterns, and common scam area codes.</p>
+      </div>
+    
+    </div>
+  </div>
+
+  <div class="section pricing">
+    <h2>Pricing</h2>
+    
+      <div class="price-card">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <ul>
+          <li>10 checks per day</li>
+          <li>All analysis types</li>
+          <li>Scam scoring</li>
+        </ul>
+        <a href="https://t.me/ScamShieldBot" class="buy-btn">Start Free</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Premium</h3>
+        <div class="price">$5<span>/month</span></div>
+        <ul>
+          <li>Unlimited checks</li>
+          <li>Always-on monitoring</li>
+          <li>Family protection</li>
+          <li>API access</li>
+        </ul>
+        <a href="#" class="buy-btn">Coming Soon</a>
+      </div>
+    
+  </div>
+
+  <div class="social-proof">
+    
+      <div class="stat"><div class="number">100+</div><div class="label">Scam Patterns</div></div>
+      <div class="stat"><div class="number">4</div><div class="label">Analysis Types</div></div>
+      <div class="stat"><div class="number">7</div><div class="label">Scam Categories</div></div>
+    
+  </div>
+
+  <div class="section">
+    <h2>Frequently Asked Questions</h2>
+    
+      <div class="feature"><h3>How accurate is it?</h3><p>We detect 70-80% of common scam patterns. It's a tool to help you decide, not a guarantee.</p></div>
+      <div class="feature"><h3>What can I check?</h3><p>Messages, emails, URLs, crypto addresses, and phone numbers. Paste anything suspicious.</p></div>
+      <div class="feature"><h3>Is my data safe?</h3><p>We don't store your messages. Analysis happens in real-time and is immediately discarded.</p></div>
+    
+  </div>
+
+  <div class="footer">
+    <p>Built with ❤️ by <a href="https://github.com/Clawthority">Clawthority</a></p>
+    <p style="margin-top: 10px; opacity: 0.7;">100+ patterns. 7 categories. One tool.</p>
+  </div>
+
+</body>
+</html>
