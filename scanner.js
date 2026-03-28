@@ -97,10 +97,16 @@ const SCAM_PATTERNS = {
 
 // --- Known Scam Indicators ---
 const KNOWN_SCAM_URLS = [
-  /bit\.ly/i, /tinyurl/i, /t\.co/i, // Shortened URLs (suspicious context)
   /\.(xyz|top|buzz|club|work|gq|ml|tk|cf|ga)\//i, // Suspicious TLDs
   /secure.*login.*verify/i, /account.*update.*confirm/i,
   /amazon.*signin.*verify/i, /apple.*id.*unlock/i
+];
+
+// URL shorteners that are used legitimately but worth noting in scam context
+// These are NOT flagged on their own — only when combined with other scam signals
+const URL_SHORTENERS = [
+  /bit\.ly/i, /tinyurl/i, /t\.co/i, /goo\.gl/i, /ow\.ly/i,
+  /is\.gd/i, /buff\.ly/i, /amzn\.to/i, /fb\.me/i
 ];
 
 const KNOWN_SCAM_PHRASES = [
@@ -159,10 +165,18 @@ function analyzeMessage(text) {
     score += 20;
   }
 
-  // Check for shortened URLs
-  if (/(?:bit\.ly|tinyurl|t\.co|shorturl)/i.test(text)) {
-    flags.push({ category: 'suspicious_url', detail: 'Shortened URL detected' });
-    score += 15;
+  // Check for shortened URLs — only flag contextually (not standalone)
+  const hasShortener = URL_SHORTENERS.some(p => p.test(text));
+  if (hasShortener) {
+    // Only boost if other scam signals already present
+    if (hasUrgency || hasMoney || hasAuthority) {
+      flags.push({ category: 'suspicious_url', detail: 'Shortened URL in suspicious context' });
+      score += 10;
+    } else {
+      // Just note it, minimal impact — legitimate services use shorteners
+      flags.push({ category: 'info', detail: 'Shortened URL detected (common in legit marketing)' });
+      score += 2;
+    }
   }
 
   // Cap at 100
@@ -247,6 +261,7 @@ async function checkCryptoAddress(address) {
 // Check a URL for phishing indicators
 function checkUrl(url) {
   const result = { url, risk: 'LOW', details: [] };
+  const legitDomains = ['google.com', 'apple.com', 'amazon.com', 'microsoft.com', 'paypal.com', 'facebook.com', 'netflix.com', 'bankofamerica.com', 'github.com', 'linkedin.com', 'twitter.com', 'x.com'];
 
   try {
     const parsed = new URL(url);
@@ -259,10 +274,9 @@ function checkUrl(url) {
     }
 
     // Check for typosquatting
-    const legitDomains = ['google.com', 'apple.com', 'amazon.com', 'microsoft.com', 'paypal.com', 'facebook.com', 'netflix.com', 'bankofamerica.com'];
     for (const legit of legitDomains) {
-      // Skip if this IS the legitimate domain
-      if (parsed.hostname === legit || parsed.hostname === 'www.' + legit) continue;
+      // Skip if this IS the legitimate domain or a legitimate subdomain of it
+      if (parsed.hostname === legit || parsed.hostname.endsWith('.' + legit)) continue;
 
       const variations = [
         legit.replace('o', '0'), legit.replace('e', '3').replace('a', '4'),
@@ -286,11 +300,15 @@ function checkUrl(url) {
       result.details.push('Data URI — potential phishing');
     }
 
-    // Check path for phishing keywords
-    const phishingPath = /login|signin|verify|account|secure|update|confirm/i;
-    if (phishingPath.test(parsed.pathname)) {
-      result.risk = result.risk === 'HIGH' ? 'HIGH' : 'MEDIUM';
-      result.details.push('URL path contains login/verification keywords');
+    // Check path for phishing keywords — skip on trusted domains
+    const isTrustedHost = legitDomains.some(d => parsed.hostname === d || parsed.hostname.endsWith('.' + d));
+
+    if (!isTrustedHost) {
+      const phishingPath = /login|signin|verify|account|secure|update|confirm/i;
+      if (phishingPath.test(parsed.pathname)) {
+        result.risk = result.risk === 'HIGH' ? 'HIGH' : 'MEDIUM';
+        result.details.push('URL path contains login/verification keywords');
+      }
     }
   } catch(e) {
     result.risk = 'UNKNOWN';
