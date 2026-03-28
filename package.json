@@ -1,0 +1,12 @@
+{
+  "name": "scam-shield",
+  "version": "1.0.0",
+  "description": "Multi-surface scam detection engine. Analyzes messages, URLs, crypto addresses, and phone numbers.",
+  "main": "scanner.js",
+  "scripts": {
+    "scan": "node scanner.js",
+    "test": "node scanner.js"
+  },
+  "keywords": ["scam", "fraud", "phishing", "security", "detection", "crypto", "safety"],
+  "license": "MIT"
+}
