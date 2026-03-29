@@ -7,6 +7,17 @@
     "scan": "node scanner.js",
     "test": "node scanner.js"
   },
-  "keywords": ["scam", "fraud", "phishing", "security", "detection", "crypto", "safety"],
-  "license": "MIT"
+  "keywords": [
+    "scam",
+    "fraud",
+    "phishing",
+    "security",
+    "detection",
+    "crypto",
+    "safety"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.67.0"
+  }
 }
