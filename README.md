@@ -27,22 +27,17 @@ Works as a Telegram bot, CLI tool, or API. Drop it into your workflow, your fami
 
 ## What It Detects (100+ patterns)
 
-| Surface | What It Checks |
-|---------|---------------|
-| **Messages** | Urgency tactics, financial manipulation, authority impersonation, romance scams, crypto scams, phishing, social engineering |
-| **URLs** | Suspicious TLDs, typosquatting, IP addresses, phishing paths |
-| **Crypto** | Burn addresses, dust attacks, known scam tokens |
-| **Phones** | Premium rates, spoofed numbers, scam area codes |
-
-## Scam Patterns Detected (100+ patterns)
-
-- 🚨 **Urgency/fear tactics** — "Act now!", "Expires soon!", "Limited time!"
-- 💰 **Financial manipulation** — "Guaranteed returns!", "Double your money!"
-- 👮 **Authority impersonation** — "IRS", "FBI", "Your account is suspended"
-- 💕 **Romance scams** — "I love you", "I'm stranded", "Send money"
-- ₿ **Crypto scams** — "Connect your wallet", "Free airdrop", "Double your BTC"
-- 🎣 **Phishing** — "Click here to verify", "Update your password"
-- 🧠 **Social engineering** — "Keep this secret", "Trust me", "Not a scam"
+| Surface | Patterns | Examples |
+|---------|----------|----------|
+| 🚨 **Urgency/fear tactics** | Messages | "Act now!", "Expires soon!", "Limited time!" |
+| 💰 **Financial manipulation** | Messages | "Guaranteed returns!", "Double your money!" |
+| 👮 **Authority impersonation** | Messages | "IRS", "FBI", "Your account is suspended" |
+| 💕 **Romance scams** | Messages | "I love you", "I'm stranded", "Send money" |
+| ₿ **Crypto scams** | Messages, Crypto | "Connect your wallet", "Free airdrop", "Double your BTC" |
+| 🎣 **Phishing** | Messages, URLs | "Click here to verify", typosquatting, suspicious TLDs |
+| 🧠 **Social engineering** | Messages | "Keep this secret", "Trust me", "Not a scam" |
+| 📞 **Phone scams** | Phones | Premium rates, spoofed numbers, scam area codes |
+| 💎 **Dust attacks** | Crypto | Burn addresses, known scam tokens |
 
 ## 🤖 Telegram Bot
 
