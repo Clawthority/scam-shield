@@ -17,13 +17,11 @@ Works as a Telegram bot, CLI tool, or API. Drop it into your workflow, your fami
 
 ## How It Works
 
-```
-1. You receive something suspicious (message, link, number, wallet address)
-2. Paste it into Scam Shield (Telegram bot, CLI, or API)
-3. Auto-detect input type or specify: message, url, crypto, phone
-4. Get instant risk score + matched scam patterns explained
-5. Make an informed decision — block, ignore, or proceed with caution
-```
+1. **Receive something suspicious** — a DM, a link, a crypto wallet, a phone number
+2. **Paste it into Scam Shield** — via Telegram bot, CLI, or API call
+3. **Auto-detection kicks in** — identifies whether it's a message, URL, crypto address, or phone number (or specify manually)
+4. **Get your answer** — instant risk score (0–100) with every matched pattern explained
+5. **Make an informed decision** — block, ignore, or proceed with caution
 
 ## What It Detects (100+ patterns)
 
@@ -82,6 +80,8 @@ node scanner.js "suspicious message or url or address" | node format.js
 | 0-14 | ✅ CLEAN | No scam indicators detected. |
 
 ## Setup
+
+**Prerequisites:** Node.js 18+ and npm.
 
 ```bash
 # Clone and install
