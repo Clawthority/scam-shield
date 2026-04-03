@@ -79,13 +79,30 @@ node scanner.js "suspicious message or url or address" | node format.js
 | 15-39 | ⚡ LOW_RISK | Minor indicators. Usually safe. |
 | 0-14 | ✅ CLEAN | No scam indicators detected. |
 
+## Example Output
+
+```
+📊 SCAM SHIELD ANALYSIS
+
+🔍 Input Type: Message
+🚨 Risk Score: 85/100 (HIGH_RISK)
+
+Matched Patterns:
+• "Congratulations! You won" → Prize/lottery scam
+• "Click here to claim" → Phishing attempt
+• "$10,000" → Unrealistic prize value
+• "Act now!" → Urgency/fear tactics
+
+⚠️ VERDICT: Do not engage. This is a classic prize scam.
+```
+
 ## Setup
 
 **Prerequisites:** Node.js 18+ and npm.
 
 ```bash
 # Clone and install
-git clone https://github.com/your-org/scam-shield.git
+git clone https://github.com/Clawthority/scam-shield.git
 cd scam-shield
 npm install
 
