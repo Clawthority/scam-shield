@@ -102,6 +102,25 @@ const KNOWN_SCAM_URLS = [
   /amazon.*signin.*verify/i, /apple.*id.*unlock/i
 ];
 
+// Trusted legitimate domains that should never trigger HIGH risk
+const TRUSTED_DOMAINS = [
+  'google.com', 'google.co.uk', 'google.ca', 'google.com.au',
+  'apple.com', 'icloud.com', 'appleid.apple.com',
+  'amazon.com', 'amazon.co.uk', 'amazonservices.com',
+  'microsoft.com', 'microsoftonline.com', 'live.com', 'outlook.com',
+  'facebook.com', 'instagram.com', 'whatsapp.com', 'meta.com',
+  'twitter.com', 'x.com',
+  'linkedin.com', 'github.com', 'gitlab.com', 'bitbucket.org',
+  'netflix.com', 'spotify.com', 'youtube.com',
+  'paypal.com', 'venmo.com', 'cashapp.com', 'zelle.com',
+  'chase.com', 'bankofamerica.com', 'wellsfargo.com', 'citi.com', 'usbank.com',
+  'fedex.com', 'ups.com', 'usps.com', 'dhl.com',
+  'dropbox.com', 'box.com', 'evernote.com', 'notion.so',
+  'slack.com', 'zoom.us', 'teams.microsoft.com',
+  'reddit.com', 'discord.com', 'telegram.org', 'signal.org',
+  'wikimedia.org', 'wikipedia.org', 'stackexchange.com'
+];
+
 // URL shorteners that are used legitimately but worth noting in scam context
 // These are NOT flagged on their own — only when combined with other scam signals
 const URL_SHORTENERS = [
@@ -261,10 +280,19 @@ async function checkCryptoAddress(address) {
 // Check a URL for phishing indicators
 function checkUrl(url) {
   const result = { url, risk: 'LOW', details: [] };
-  const legitDomains = ['google.com', 'apple.com', 'amazon.com', 'microsoft.com', 'paypal.com', 'facebook.com', 'netflix.com', 'bankofamerica.com', 'github.com', 'linkedin.com', 'twitter.com', 'x.com'];
 
   try {
     const parsed = new URL(url);
+
+    // Check if this is a trusted domain first — if so, always LOW risk
+    const isTrustedHost = TRUSTED_DOMAINS.some(d => 
+      parsed.hostname === d || parsed.hostname.endsWith('.' + d)
+    );
+    if (isTrustedHost) {
+      result.risk = 'LOW';
+      result.details.push('Trusted domain');
+      return result;
+    }
 
     // Check suspicious TLDs
     const suspiciousTlds = ['.xyz', '.top', '.buzz', '.club', '.work', '.gq', '.ml', '.tk', '.cf', '.ga'];
@@ -273,14 +301,16 @@ function checkUrl(url) {
       result.details.push(`Suspicious TLD: ${parsed.hostname}`);
     }
 
-    // Check for typosquatting
-    for (const legit of legitDomains) {
+    // Check for typosquatting against known legitimate domains
+    for (const legit of TRUSTED_DOMAINS.slice(0, 15)) { // Top 15 trusted domains
       // Skip if this IS the legitimate domain or a legitimate subdomain of it
       if (parsed.hostname === legit || parsed.hostname.endsWith('.' + legit)) continue;
 
+      const baseDomain = legit.split('.')[0];
       const variations = [
         legit.replace('o', '0'), legit.replace('e', '3').replace('a', '4'),
-        legit.replace('.', '-'), 'secure-' + legit, legit + '-login.com'
+        legit.replace('.', '-'), 'secure-' + legit, legit + '-login.com',
+        baseDomain + '-secure.com', 'login-' + baseDomain + '.com'
       ];
       if (variations.some(v => parsed.hostname.includes(v.split('.')[0]))) {
         result.risk = 'HIGH';
@@ -300,13 +330,11 @@ function checkUrl(url) {
       result.details.push('Data URI — potential phishing');
     }
 
-    // Check path for phishing keywords — skip on trusted domains
-    const isTrustedHost = legitDomains.some(d => parsed.hostname === d || parsed.hostname.endsWith('.' + d));
-
-    if (!isTrustedHost) {
+    // Check path for phishing keywords — skip on trusted domains (already handled above)
+    if (result.risk === 'LOW') {
       const phishingPath = /login|signin|verify|account|secure|update|confirm/i;
       if (phishingPath.test(parsed.pathname)) {
-        result.risk = result.risk === 'HIGH' ? 'HIGH' : 'MEDIUM';
+        result.risk = 'MEDIUM';
         result.details.push('URL path contains login/verification keywords');
       }
     }
