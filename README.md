@@ -46,7 +46,11 @@ Scam Shield runs as a Telegram bot. Check anything suspicious instantly:
 3. Get instant risk score with explanations
 4. No app install, no account — just open and paste
 
-## Who It's For
+## Why It Matters
+
+Every day, millions of people receive messages from "princes," "IRS agents," and "lottery winners." Scam losses topped $1.1 trillion globally in 2023. Scam Shield gives you a fighting chance — instant analysis that works even when you're tired, distracted, or emotionally manipulated.
+
+**The ROI is simple:** One prevented scam pays for months of Premium.
 
 - **Everyone** — You get scam messages daily. Now you can check them instantly.
 - **Families** — Protect less tech-savvy relatives. Forward suspicious messages and get a verdict.
