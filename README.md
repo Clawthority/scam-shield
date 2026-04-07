@@ -131,6 +131,12 @@ node scanner.js "Congratulations! You won $10,000!" message | node format.js
 
 - **[Scam Academy](../scam-academy)** — Train yourself to spot scams with interactive simulations. Scam Shield detections feed directly into Scam Academy training scenarios.
 
+## What's New (v1.0)
+
+- **100+ scam patterns** — Continuously updated detection rules across all surfaces
+- **Phone number detection** — Check suspicious phone numbers against known scam patterns
+- **CLI and API** — Multiple interfaces for developers and power users
+
 ## Contributing
 
 Issues and PRs welcome. To add new scam patterns, edit the pattern files in `patterns/` and run the test suite:
